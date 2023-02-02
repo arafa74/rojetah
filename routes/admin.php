@@ -20,11 +20,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
     Route::post('/login', 'Auth\LoginController@login');
+    Route::group(['middleware' => 'auth:admin-api'], function () {
+        //app versions
+        Route::post('/update_app_version', 'VersionController@updateVersion');
+        Route::get('/app_versions', 'VersionController@showVersion');
 
-    //app versions
-    Route::post('/update_app_version', 'VersionController@updateVersion');
-    Route::get('/app_versions', 'VersionController@showVersion');
+        //users
+        Route::get('/users', 'Users\UserController@index');
+        Route::get('/user/{id}', 'Users\UserController@show');
 
-    //users
-    Route::get('/users', 'Users\UserController@index');
-
+        //admin profile
+        Route::get('/profile', 'Auth\ProfileController@profile');
+        Route::post('/update_profile', 'Auth\ProfileController@updateProfile');
+    });

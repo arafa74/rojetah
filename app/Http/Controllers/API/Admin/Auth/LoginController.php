@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\API\Admin\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Admin\LoginRequest;
 use App\Transformers\Api\Admin\UserTransformer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Validator;
+
 
 class LoginController extends Controller
 {
@@ -14,18 +17,8 @@ class LoginController extends Controller
         $this->middleware('guest:admin', ['except' => ['logout']]);
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-
-        $this->validate($request,
-            [
-                'email' => 'required|exists:admins',
-                'password' => 'required'
-            ],
-            [
-                'email.exists' => 'This email is not registered'
-            ]
-        );
 
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
 
@@ -39,4 +32,24 @@ class LoginController extends Controller
         }
         return $this->ResponseApi('This is wrong credentials', "", 422);
     }
+
+
+//    public function login(Request $request){
+//        $validator = Validator::make($request->all(), [
+//            'email' => 'required|email',
+//            'password' => 'required|min:6',
+//        ]);
+//
+//        if(Auth::guard('admin')->attempt(['email' => request('email'), 'password' => request('password')])){
+//            $accessToken = auth()->guard('admin')->user()->createToken('authToken')->accessToken;
+//            $fractal = fractal()
+//                ->item(auth()->guard('admin')->user())
+//                ->transformWith(new UserTransformer())
+//                ->toArray();
+//            return $this->ResponseApi(trans('lang.api.retrieved'), $fractal, 200, ['token' => $accessToken]);
+//        }
+//        else{
+//            return $this->ResponseApi('Email or password incorrect', 401);
+//        }
+//    }
 }

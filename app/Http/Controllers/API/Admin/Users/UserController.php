@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Transformers\Api\Admin\Users\UserTransformer;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -36,16 +35,15 @@ class UserController extends Controller
     }
 
 
-//    public function show(Request $request , $id)
-//    {
-//        $user = User::findOrFail($id);
-//        $transactions = DB::table('wallet_transactions')->where('payable_id','=' , $user->id);
-//        $count = $transactions->count();
-//        $skip = ($request->has('skip')) ? $request->skip : 0;
-//        if ($request->has('skip')) {
-//            $transactions = $transactions->orderBy('created_at', 'DESC')->skip($skip)->take(10);
-//        }
-//        $transactions = $transactions->orderBy('created_at', 'DESC')->get();
-//        return $this->sendResponse(['user' => new FullUserDataResource($user) , 'transactions' => TransactionsResource::collection($transactions) , 'count' => $count],trans('lang.api.retrieved'));
-//    }
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+        $userData = new UserTransformer();
+        $fractal = fractal()
+            ->item($user)
+            ->transformWith($userData)
+            ->includeRoles()
+            ->toArray();
+        return $this->ResponseApi("", $fractal, 200);
+    }
 }

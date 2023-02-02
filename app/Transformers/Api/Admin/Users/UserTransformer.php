@@ -40,9 +40,7 @@ class UserTransformer extends TransformerAbstract
             'avatar' => $user->avatar ?? "",
             'email' => $user->email,
             'created_at' => $user->created_at,
-
         ];
-
         return $array;
     }
 }

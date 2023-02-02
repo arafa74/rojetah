@@ -27,8 +27,8 @@ class RouteServiceProvider extends ServiceProvider
      * @var string|null
      */
      protected $namespace = 'App\\Http\\Controllers';
-    protected $namespaceApi = 'App\\Http\\Controllers\\API\\App';
-    protected $namespaceApiAdmin = 'App\\Http\\Controllers\\API\\Admin';
+     protected $namespaceApi = 'App\\Http\\Controllers\\API\\App';
+     protected $namespaceApiAdmin = 'App\\Http\\Controllers\\API\\Admin';
 
     /**
      * Define your route model bindings, pattern filters, etc.
