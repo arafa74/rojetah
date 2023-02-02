@@ -19,7 +19,7 @@ class CreateDeviceTokensTable extends Migration
             $table->string('device_id')->default(true);
             $table->enum('device', [0,1,2])->default(0);
             $table->text('token')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('Users');
             $table->timestamps();
         });
     }

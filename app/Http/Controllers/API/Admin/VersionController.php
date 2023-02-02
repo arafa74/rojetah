@@ -2,16 +2,9 @@
 
 namespace App\Http\Controllers\API\Admin;
 
-use App\Http\Controllers\AppBaseController;
 use App\Http\Controllers\Controller;
-use App\Models\Admin;
-use App\Models\AppData;
-use App\Models\Order;
-use App\Models\SocialContact;
 use App\Models\Version;
-use App\Traits\Setting;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class VersionController extends Controller
 {

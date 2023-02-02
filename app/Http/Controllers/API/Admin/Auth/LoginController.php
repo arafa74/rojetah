@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Transformers\Api\Admin\UserTransformer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {

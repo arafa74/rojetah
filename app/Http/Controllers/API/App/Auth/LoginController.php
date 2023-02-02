@@ -41,8 +41,8 @@ class LoginController extends Controller
         $user = User::where('provider_id', $request->provider_id)->first();
         if (!$user) {
             $validator = Validator::make($request->all(), [
-                'mobile' => 'nullable|unique:users',
-                'email' => 'nullable|email|min:3|max:255|unique:users',
+                'mobile' => 'nullable|unique:Users',
+                'email' => 'nullable|email|min:3|max:255|unique:Users',
             ]);
             if ($validator->fails()) {
                 return $this->ResponseApi($validator->errors()->first(), $validator->errors(), 422);

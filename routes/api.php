@@ -23,4 +23,5 @@ Route::group(['prefix' => 'v1/user'], function () {
     Route::post('/register', 'Auth\RegisterController@register');
     Route::post('/login', 'Auth\LoginController@login');
     Route::post('/social_login', 'Auth\LoginController@social_login');
+    Route::get('/app_versions', 'VersionController@versions');
 });
