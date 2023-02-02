@@ -25,3 +25,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     Route::post('/update_app_version', 'VersionController@updateVersion');
     Route::get('/app_versions', 'VersionController@showVersion');
 
+    //users
+    Route::get('/users', 'Users\UserController@index');
+
