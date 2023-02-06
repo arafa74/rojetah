@@ -22,7 +22,7 @@ class LoginController extends Controller
             return $this->ResponseApi($validator->errors()->first(), $validator->errors(), 422);
         }
         if (Auth::attempt(['mobile' => $request->mobile, 'password' => $request->password])) {
-            $user = Auth::user();
+            $user = auth()->user();
             $loginMessage = trans('messages.successfully_login');
             $token = $user->createToken('rojetah')->accessToken;
             $fractal = fractal()

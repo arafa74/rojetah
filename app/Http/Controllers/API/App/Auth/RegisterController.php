@@ -12,6 +12,8 @@ class RegisterController extends Controller
     public function Register(RegisterRequest $request)
     {
         $user = User::create($request->validated());
+        $user->mobile_verified = 0;
+        $user->update();
         $fractal = fractal()
             ->item($user)
             ->transformWith(new UserTransformer())

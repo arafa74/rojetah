@@ -52,4 +52,8 @@ class User extends Authenticatable
     {
         $this->attributes['password'] =  bcrypt($password);
     }
+
+    public function optCodes(){
+        return $this->hasMany(OTP::class);
+    }
 }
